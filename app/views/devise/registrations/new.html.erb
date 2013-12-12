@@ -1,0 +1,46 @@
+<div class="col-xs-6 col-xs-offset-3">
+  <h2>We are growing. Join us!</h2>
+  <hr />
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {role:"form"}) do |f| %>
+    <% unless resource.errors.empty? %>
+      <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h3> <%= pluralize(resource.errors.size, "error") %> occurred: </h3>
+        <ul>
+          <% resource.errors.full_messages.each do |error| %>
+            <li> <%= error %> </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :autofocus => true, class:"form-control", placeholder:"Enter your name" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true, class:"form-control", placeholder:"Enter your email" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, :autofocus => true, class:"form-control", placeholder:"Enter your password" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :autofocus => true, class:"form-control", placeholder:"Confirm password" %>
+    </div>
+
+    <div>
+      <%= f.submit "Sign up", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <div style="margin-top:20px">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

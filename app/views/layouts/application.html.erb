@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twiddr</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	  <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="container">
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		      <span class="sr-only">Toggle navigation</span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </button>
+		    <%= link_to "Twiddr", root_path, class:"navbar-brand" %>
+		  </div>
+
+		  <!-- Collect the nav links, forms, and other content for toggling -->
+		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    <ul class="nav navbar-nav navbar-right">
+		    	<% if !user_signed_in? %>
+			      <li>
+			      	<%= link_to "Login", new_user_session_path %>
+			      </li>
+
+			      <li>
+			      	<%= link_to "Sign up", new_user_registration_path %>
+			      </li>
+			    <% else %>
+			    	<li class="active">
+			    		<%= link_to "Hi #{current_user.name}!", "#", style:"color:#FFF" %>
+			    	</li>
+
+			    	<li>
+			    		<%= link_to "Dashboard", dashboard_path, style:"color:#FFF" %>
+			    	</li>
+
+			    	<li>
+			    		<%= link_to "Logout", destroy_user_session_path, method: :delete, style:"color:#FFF", confirm:"Sign out?" %>
+			    	</li>
+ 			    <% end %>
+		    </ul>
+		  </div><!-- /.navbar-collapse -->
+		</div>
+	</nav>
+	
+	<%= notice if notice %>
+	<%= alert if alert %>
+	
+	<div class="row" style="margin-top:70px">
+		<% if notice %>
+			<div class="alert alert-success">
+				<p> <%= notice %> </p>
+			</div>
+		<% end %>
+
+		<% if alert %>
+			<div class="alert alert-danger">
+				<p> <%= alert %> </p>
+			</div>
+		<% end %>
+
+		<%= yield %>
+	</div>
+</div>
+
+</body>
+</html>
