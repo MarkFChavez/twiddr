@@ -87,6 +87,14 @@ Feature: Using the twiddr application
 		Given I am on the homepage
 		When I go to "/dashboard" page
 		Then I should see "You need to sign in or sign up before continuing"
+
+	Scenario: Going to homepage when already logged in should redirect you to dashboard
+		Given there is a user:
+			| name 				| email 				| password 				|
+			| markchavez		| sampleuser@gmail.com 	| mysamplepassword 		|
+		And I am logged in
+		When I go to "/" page
+		Then I should be on "/dashboard" page
 		
 
 
