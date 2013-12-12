@@ -27,6 +27,10 @@ When(/^I follow "(.*?)" (link|button)$/) do |text, target|
 	end
 end
 
+When(/^I go to "(.*?)" page$/) do |link|
+  visit link
+end
+
 Then(/^I should see "(.*?)"$/) do |text|
 	page.should have_content(text)
 end

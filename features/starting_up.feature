@@ -82,6 +82,11 @@ Feature: Using the twiddr application
 		And I should see "Login"
 		And I should see "Sign up"
 		But I should not see "Hi markchavez!"
+
+	Scenario: Going to dashboard page without logging in
+		Given I am on the homepage
+		When I go to "/dashboard" page
+		Then I should see "You need to sign in or sign up before continuing"
 		
 
 
