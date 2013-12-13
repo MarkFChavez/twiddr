@@ -1,0 +1,17 @@
+%div.col-lg-12
+	%h2= "#{pluralize(@search_result.size, "result")} found"
+	%hr
+
+	- @search_result.each do |user|
+		= div_for user, style:"padding:20px" do 
+			%div.pull-left
+				= g(user, "img-circle")
+				%span.lead= user.name
+				%small= user.email
+				- if !current_user.following?(user)
+					%span= link_to "Follow", relationships_path(id: user.id), method: :post, class:"btn btn-info", confirm: "Follow #{user.name}?"
+				- else
+					%span= link_to "Following", "#", class:"btn btn-warning disabled"
+			%div.clearfix
+
+	= link_to "Back", dashboard_path, class:"btn btn-lg btn-primary"

@@ -1,2 +1,43 @@
-%div.col-xs-12
+%div.row
+	%div.col-lg-12.col-xs-12
+		%div.pull-right
+			= form_tag search_path, method: :get, class:"form-inline", role:"form" do 
+				%div.form-group
+					= text_field_tag :search, "", class:"form-control input-sm", placeholder:"Search users"
+				= submit_tag "Search", class:"btn btn-sm btn-primary"
+
+%div.row{style:"margin-top:10px"}
+	%div.col-lg-4.col-xs-12
+		%div.well
+			- unless @twidd.errors.empty?
+				%div.alert.alert-danger.alert-dismissable
+					%button.close{type:"button",data:{dismiss:"alert"},aria:{hidden: true}}
+						&times;
+					%ul
+						- @twidd.errors.full_messages.each do |e|
+							%li= e
+
+			= form_for @twidd, url: twidds_path, method: :post, role:"form" do |f|
+				%div.form-group
+					= f.text_field :title, class:"form-control", placeholder:"Compose new Twidd", required:"required"
+				= f.submit "Twidd", class:"btn btn-primary pull-right"
+			%div.clearfix
+
+			%div{style:"margin-top:20px"}
+				%p.lead
+					Twidds
+					= link_to "#{current_user.twidds.size}", "#"
+				%p.lead
+					Following 
+					= link_to "#{current_user.followed_users.size}", "#"
+
+				%p.lead
+					Followers
+					= link_to "#{current_user.followers.size}", "#"
+
+				%div
+					- @followers.each do |user|
+						= g(user, "", size: 50)
+	%div.col-lg-8.col-xs-12
+		= render(@twidds) or "<div class='alert alert-danger'><p>No twidds available</p></div>".html_safe
 	

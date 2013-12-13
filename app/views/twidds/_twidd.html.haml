@@ -1,0 +1,12 @@
+= div_for twidd do 
+	%blockquote
+		%div.pull-left
+			= g(twidd.user, "media-object img-circle")
+		%div.pull-left
+			%p.lead= twidd.title
+			%small= "#{twidd.user.name} / #{twidd.user.email}"
+			
+		- if can? :destroy, twidd
+			%div.pull-right
+				= link_to "Remove twidd", twidd, method: :delete, class:"btn btn-danger", confirm:"Remove this twidd?"
+		%div.clearfix

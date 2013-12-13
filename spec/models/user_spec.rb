@@ -43,4 +43,8 @@ describe User do
   		end
   	end
   end
+
+  context "associations" do 
+    it { should have_many(:twidds).dependent(:destroy) }
+  end
 end

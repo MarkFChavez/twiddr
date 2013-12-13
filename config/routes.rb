@@ -1,9 +1,13 @@
 Twiddr::Application.routes.draw do
-  
+
   devise_for :users
 
   root to: "landing#index"
   match 'dashboard' => 'landing#show', as: :dashboard
+  match 'search'  =>  'landing#search', as: :search
+
+  resources :twidds
+  resources :relationships
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
